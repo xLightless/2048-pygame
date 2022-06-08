@@ -1,0 +1,4 @@
+Create a version of the game 2048 but instead it is 512.
+Tiles put on the board can only be 2 and 4
+
+All tiles can be moved up, down, left and right
