@@ -42,8 +42,8 @@ class Button(object):
         self.screen     = screen
         font            = pygame.font.SysFont('Corbel', 35)
         text            = font.render(button_text, True, text_color)
-        self.width           = text.get_width() + padding_x
-        self.height          = text.get_height() + padding_y
+        self.width      = text.get_width() + padding_x
+        self.height     = text.get_height() + padding_y
         rect            = pygame.Rect(posX,posY, self.width, self.height)
         
         pygame.draw.rect(self.screen, button_color, rect, border_radius=border_radius)
