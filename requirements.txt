@@ -1,0 +1,10 @@
+altgraph==0.17.2
+future==0.18.2
+pefile==2022.5.30
+pip==21.2.4
+pygame==2.1.2
+pyinstaller==5.1
+pyinstaller-hooks-contrib==2022.7
+pywin32-ctypes==0.2.0
+screeninfo==0.8
+setuptools==58.1.0

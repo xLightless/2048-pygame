@@ -36,7 +36,7 @@ class Button(object):
             button_text (str): Button text color.
             text_color (tuple, optional): Text color (R, G, B). Defaults to (255, 255, 255).
             button_color (tuple, optional): Button color (R, G, B). Defaults to (0, 0, 0).
-            event (_type_, optional): Runs when button is clicked. Defaults to None if not used.
+            event (_type_, optional): Runs when button is clicked. Defaults to None if not used explictly.
         """
         
         self.screen     = screen
@@ -52,3 +52,9 @@ class Button(object):
         self.event      = event
         self.rect       = rect
         
+def callback(callback):
+    """ Used to run the operation of the button or event """
+    if type(callback) == str:
+        print(callback)
+    else:
+        return callback

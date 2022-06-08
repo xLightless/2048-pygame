@@ -1,8 +1,7 @@
 import pygame
 
 from color import Colors
-from gfxdraw import Button
-from screen import Dashboard
+from gfxdraw import Button, callback
 
 color = Colors()
 
@@ -25,7 +24,9 @@ class Engine(object):
         
         while not terminated:
             """ Keeps engine open """
-            screen.fill(color.RANDOM_COLOR)
+            try: screen.fill(color.RANDOM_COLOR)
+            except Exception: continue
+            finally: screen.fill(color.RANDOM_COLOR)
             mousepos = pygame.mouse.get_pos()
 
             for event in pygame.event.get():
@@ -43,20 +44,24 @@ class Engine(object):
             if DASHBOARD == True:
                 screen.fill(color.RANDOM_COLOR)
                 RESTART_BUTTON = Button(screen, self.width/2 - 104, self.height/2 - 27.5, 'Restart!', color.WHITE, color.BLACK, padding_x=100, padding_y=20, border_radius=9)
+                QUIT_BUTTON = Button(screen, self.width/2 + 110, self.height/2 - 27.5, 'Quit', color.WHITE, color.BLACK, padding_x=100, padding_y=20, border_radius=9)
+                
                 if self.is_over(RESTART_BUTTON.rect, mousepos):
                     if event.type == pygame.MOUSEBUTTONDOWN:
                             if event.button == 1:
+                                RESTART_BUTTON.event = callback("this is a function that runs when pressing a button")
                                 DASHBOARD = False
-                                RESTART_BUTTON.event = self.test_func("this is a function that runs when pressing a button")
-
+                elif self.is_over(QUIT_BUTTON.rect, mousepos):
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            RESTART_BUTTON.event = callback("You have pressed the quit button, good bye!")
+                            terminated = True
                     
             clock.tick(screen_fps)
             pygame.display.update()
+            pygame.display.flip()
        
         pygame.quit()
     
     def is_over(self, rect, pos):
         return True if rect.collidepoint(pos[0], pos[1]) else False
-    
-    def test_func(self, someItem):
-        print(someItem)
