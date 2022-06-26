@@ -1,0 +1,1 @@
+cmd /k "C:\Games\Development\512\venv\Scripts\activate.bat"
