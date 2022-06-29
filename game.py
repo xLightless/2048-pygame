@@ -1,5 +1,6 @@
 import pygame
 import os
+import time
 
 from color import Colors
 from gfxdraw import Button
@@ -29,7 +30,7 @@ class Engine(object):
         sq                  = GRID_ARRAY(screen, SIZE, GRID_X, GRID_Y)
         
         while not terminated:
-            """ Keeps engine open """
+            
             screen.fill(color.background_color)
             mousepos = pygame.mouse.get_pos()
 
@@ -44,10 +45,17 @@ class Engine(object):
                     elif event.key == pygame.K_F11:
                         fullscreen = not fullscreen
                         if fullscreen:
-                            screen = pygame.display.set_mode((monitor_size), pygame.FULLSCREEN)
+                            screen = pygame.display.set_mode((monitor_size), pygame.FULLSCREEN)       
                         else:
                             screen = pygame.display.set_mode((monitor_size[0]/2, monitor_size[1]/2), pygame.RESIZABLE)
-                            
+                      
+                # Resizes the game bases on the window size.      
+                if event.type == pygame.VIDEORESIZE:
+                    if (sq.grid_height*2)<event.h:
+                        sq.size = (SIZE[0]*2, SIZE[1]*2)
+                    else:
+                        sq.size = SIZE
+                    
             if not DASHBOARD:
                 pygame.display.set_caption("GAME SCREEN")
                 sq.draw()
@@ -86,6 +94,10 @@ class Engine(object):
             pygame.display.update()
             pygame.display.flip()
             
+        # for i in range(len(sq.block_list)):
+        #     print(i)
+        print(sq.block_list)
+        
     def is_over(self, rect, pos):
             """ checks if mouse is over a rect position """
             return True if rect.collidepoint(pos[0], pos[1]) else False
